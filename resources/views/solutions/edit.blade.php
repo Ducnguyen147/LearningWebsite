@@ -6,7 +6,7 @@
     <div class="container py-3">
       <h2></h2>
       <p><strong>Task description:</strong> {{ $solutions->description }}</p>
-      <p><strong>Solution:</strong> {{ $solutions->solution }}</p>
+      <p><strong>Student solution:</strong> {{ $solutions->solution }}</p>
 
       <form action="" method="post">
         @method('PUT')
