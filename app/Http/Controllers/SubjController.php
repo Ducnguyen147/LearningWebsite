@@ -19,9 +19,25 @@ class SubjController extends Controller
         return view('students.subjects',["subjects"=>$sub_info]);
     }
 
+    public function registerSubjects() {
+        $user = Auth::user();
+        $takenSubjects = $user->subjects()->pluck('subject_prs.id');
+        $availableSubjects = SubjectPr::whereNotIn('id', $takenSubjects)->with('user')->get();
+
+        return view('students.register',["availableSubjects"=>$availableSubjects]);
+    }
+
     public function create() {
         return view('TeaSubject.new_subject');
     }
+
+    public function registerStudent(SubjectPr $subject)
+{
+    $user = Auth::user();
+    $user->subjects()->attach($subject->id);
+
+    return redirect('/student/subjects');
+}
 
     public function store(SubjectFormRequest $request) { 
             SubjectPr::create($request->validated()); 
@@ -35,24 +51,34 @@ class SubjController extends Controller
     }
 
     public function update(SubjectFormRequest $request, SubjectPr $subject) {
+        $this->authorize('view',$subject);
         $subject->update($request->validated());  
         return redirect('/subjects');    
     }
 
     public function show(SubjectPr $subject) {
+        $this->authorize('view',$subject);
         return view('TeaSubject.view_subject',[
             "show" => $subject,
         ]);
     }
 
     public function showTask(SubjectPr $subject) {
+        $this->authorize('view',$subject);
         return view('Teasubject.show',[
             "showtask" => $subject,
         ]);
     }
 
     public function destroy(SubjectPr $subject) {
+        $this->authorize('view',$subject);
         $subject->delete();
         return redirect("/subjects");
+    }
+
+    public function deregisterStudent(SubjectPr $subject) {
+        $user = Auth::user();
+        $user->subjects()->detach($subject->id);
+        return redirect("/student/subjects");
     }
 }

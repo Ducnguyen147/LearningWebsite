@@ -53,6 +53,10 @@ Route::put('/solutions/{solution}/edit',[SolPrController::class,'update'])->name
 
 //Student
 Route::get('/student/subjects', [SubjController::class,'indexStudent'])->middleware('auth'); //index function
+Route::delete('/student/subjects/{subject}/deregister',[SubjController::class,'deregisterStudent'])->middleware('auth');
+
+Route::get('/student/subjects/register', [SubjController::class, 'registerSubjects'])->middleware('auth');
+Route::post('/student/subjects/{subject}/register', [SubjController::class, 'registerStudent'])->middleware('auth');
 
 Auth::routes();
 

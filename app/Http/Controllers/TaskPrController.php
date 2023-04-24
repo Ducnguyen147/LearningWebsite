@@ -42,6 +42,7 @@ class TaskPrController extends Controller
      */
     public function show(TaskPr $task)
     {
+        $this->authorize('view',$task);
         return view('tasks.show',[
             "tasks" => $task,
         ]);

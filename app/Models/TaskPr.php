@@ -19,4 +19,5 @@ class TaskPr extends Model
     {
         return $this->hasMany(SolPr::class);
     }
+    
 }

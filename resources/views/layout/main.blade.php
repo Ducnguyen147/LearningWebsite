@@ -20,9 +20,20 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/subjects">Home <span class="sr-only">(current)</span></a>
-            </li>
+          <li class="nav-item active">
+    @if(Auth::check())
+        @if(Auth::user()->role == 'student')
+            <a class="nav-link" href="/student/subjects">Home <span class="sr-only">(current)</span></a>
+        @elseif(Auth::user()->role == 'teacher')
+            <a class="nav-link" href="/subjects">Home <span class="sr-only">(current)</span></a>
+        @else
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        @endif
+    @else
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+    @endif
+</li>
+
             <li class="nav-item">
               <a class="nav-link" href="#">Link </a>
             </li>
