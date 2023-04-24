@@ -11,6 +11,6 @@ class SolPr extends Model
     public $fillable=["submission_date","name","email","points","evaluation_time","solution"];
     public function task()
     {
-        return $this->belongsTo(TaskPr::class);
+        return $this->belongsTo(TaskPr::class,'task_pr_id');
     }
 }

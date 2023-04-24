@@ -19,17 +19,21 @@ class SubjectPrSeeder extends Seeder
         DB::table('subject_prs')->truncate();
         DB::table('task_prs')->truncate();
         DB::table('sol_prs')->truncate();
-        SubjectPr::factory()
-        ->count(10)
-        ->has(
-            TaskPr::factory()
-                ->count(3)
-                ->has(
-                    SolPr::factory()->count(3),
-                    'solutions'
-                ),
-            'tasks'
-        )
-        ->create();
+
+        $users=\App\Models\User::all();
+        $users->each(function ($user){
+            SubjectPr::factory(10)
+            ->for($user)
+            ->has(
+                TaskPr::factory()
+                    ->count(3)
+                    ->has(
+                        SolPr::factory()->count(3),
+                        'solutions'
+                    ),
+                'tasks'
+            )
+            ->create();
+        });
     }
 }

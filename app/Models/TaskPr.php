@@ -13,7 +13,7 @@ class TaskPr extends Model
     public $fillable = ["name","description","points"];
     public function subject()
     {
-        return $this->belongsTo(SubjectPr::class);
+        return $this->belongsTo(SubjectPr::class,'subject_pr_id');
     }
     public function solutions()
     {

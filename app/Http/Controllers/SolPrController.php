@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSolPrRequest;
 use App\Http\Requests\UpdateSolPrRequest;
 use App\Models\SolPr;
 use App\Models\TaskPr;
+use Illuminate\Support\Carbon;
 
 class SolPrController extends Controller
 {
@@ -36,9 +37,9 @@ class SolPrController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SolPr $solution)
+    public function show(TaskPr $task)
     {
-        
+
     }
 
     /**
@@ -54,9 +55,14 @@ class SolPrController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSolPrRequest $request, SolPr $solPr)
+    public function update(UpdateSolPrRequest $request, SolPr $solution)
     {
-        //
+        $solution->update($request->validated());
+        $solution->evaluation_time = Carbon::now();
+        $solution->save(); 
+        $task = $solution->task; // Access the related TaskPr instance
+
+        return redirect()->route('subjects.tasks', ['task' => $task->id]);
     }
 
     /**

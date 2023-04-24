@@ -8,9 +8,10 @@
       <p><strong>Task description:</strong> {{ $solutions->description }}</p>
       <p><strong>Student solution:</strong> {{ $solutions->solution }}</p>
 
-      <form action="" method="post">
+      <form action="/solutions/{{$solutions->id}}/edit" method="post">
         @method('PUT')
         @csrf 
+
         <div class="form-group">
               <label for="points">Point</label>
               <input type="text" class="form-control @error('points') is-invalid @enderror" 
@@ -25,7 +26,6 @@
           <div class="form-group">
               <button type="submit" class="btn btn-primary">Grade the solution</button>
           </div>
-
         </div>
       </form>
     </div>

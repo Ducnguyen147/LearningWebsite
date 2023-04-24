@@ -11,7 +11,7 @@ class UpdateSolPrRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateSolPrRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'points' => 'required|integer|between:0,10',
         ];
     }
 }
