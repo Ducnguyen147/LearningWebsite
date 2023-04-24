@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="jumbotron">
-        <h1 class="display-15">Welcome back {{ Auth::user()->name }}! You are logged in as a Teacher</h1>
+        <h1 class="display-15">Welcome {{ Auth::user()->name }}! You are logged in as a Teacher</h1>
         <p class="lead">You can review your published courses, delete or create a new course below.</p>
     </div>
     
