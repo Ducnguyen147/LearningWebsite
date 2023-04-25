@@ -27,6 +27,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view', function ($user, $subject) {
         return $user->id === $subject->user->id;
     });
+
+        Gate::define('viewStudent', function ($user, $subject) {
+        return $user->subjects->contains($subject);
+    });
     
     // or if you have defined the policy
         Gate::policy(SubjectPr::class, ProjectPolicy::class);

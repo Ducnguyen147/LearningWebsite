@@ -22,6 +22,6 @@ class SubjectPr extends Model
 
     public function studentUsers()
     {
-        return $this->belongsToMany(User::class,'user_id','subject_pr_user');
+        return $this->belongsToMany(User::class,'subject_pr_user');
     }
 }

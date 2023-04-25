@@ -45,18 +45,27 @@ Route::post('/subjects/{subject}/tasks/create',[TaskPrController::class,'store']
 
 Route::delete('/tasks/{task}',[TaskPrController::class,'destroy'])->middleware('auth');
 
+
+
 //Solution
 // Route::get('/solutions/{solution}',[SolPrController::class,'show'])->name("subjects.tasks.solutions");
 
 Route::get('/solutions/{solution}/edit',[SolPrController::class,'edit'])->middleware('auth');
 Route::put('/solutions/{solution}/edit',[SolPrController::class,'update'])->name("subjects.tasks.solutions.update")->middleware('auth');
 
+Route::get('/student/subjects/tasks/{task}', [SolPrController::class,'create']) -> name("subjects.create")->middleware('auth');
+Route::post('/student/subjects/tasks/{task}', [SolPrController::class,'store'])->name("students.subjects.tasks.store")->middleware('auth');
+
 //Student
-Route::get('/student/subjects', [SubjController::class,'indexStudent'])->middleware('auth'); //index function
+Route::get('/student/subjects', [SubjController::class,'indexStudent'])->name('students')->middleware('auth'); //index function
 Route::delete('/student/subjects/{subject}/deregister',[SubjController::class,'deregisterStudent'])->middleware('auth');
 
 Route::get('/student/subjects/register', [SubjController::class, 'registerSubjects'])->middleware('auth');
 Route::post('/student/subjects/{subject}/register', [SubjController::class, 'registerStudent'])->middleware('auth');
+
+Route::get('/student/subjects/{subject}',[SubjController::class,'showStudent'])->middleware('auth');
+
+Route::get('/student/subjects/{subject}/tasks', [SubjController::class,'showTaskStudent'])-> name("students.subjects.tasks")->middleware('auth');
 
 Auth::routes();
 

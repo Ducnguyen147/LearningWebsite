@@ -22,7 +22,7 @@ class StoreSolPrRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'points' => 'required|min:0|max:10',
+            'solution' => 'required',
         ];
     }
 }

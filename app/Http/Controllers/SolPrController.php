@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateSolPrRequest;
 use App\Models\SolPr;
 use App\Models\TaskPr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SolPrController extends Controller
 {
@@ -21,17 +22,31 @@ class SolPrController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(TaskPr $task)
     {
-        //
+        return view('solutions.create',[
+            "task"=>$task,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSolPrRequest $request)
+    public function store(TaskPr $task, StoreSolPrRequest $request)
     {
-        //
+        // dd($request);
+        $solution = $task->solutions()->create(array_merge(
+            $request->validated(),
+            [
+                'submission_date' => Carbon::now(),
+                'name' => Auth::user()->name,
+                'email' => Auth::user()->email
+            ]        
+        ));
+        $subject=$task->subject;
+        return redirect()->route('students.subjects.tasks', ['subject' => $subject->id]);
+        // return redirect('/student/subjects');  
+        
     }
 
     /**

@@ -63,9 +63,23 @@ class SubjController extends Controller
         ]);
     }
 
+    public function showStudent(SubjectPr $subject) {
+        // $this->authorize('view',$subject);
+        return view('students.view',[
+            "show" => $subject,
+        ]);
+    }
+
     public function showTask(SubjectPr $subject) {
         $this->authorize('view',$subject);
         return view('Teasubject.show',[
+            "showtask" => $subject,
+        ]);
+    }
+
+    public function showTaskStudent(SubjectPr $subject) {
+        $this->authorize('viewStudent',$subject);
+        return view('students.show',[
             "showtask" => $subject,
         ]);
     }
