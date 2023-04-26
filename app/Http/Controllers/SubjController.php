@@ -14,6 +14,11 @@ class SubjController extends Controller
         return view('TeaSubject.subjects',["subjects"=>$sub_info]);
     }
 
+    public function indexCont() {
+        $cont_info = Auth::user();
+        return view('contact',["contacts"=>$cont_info]);
+    }
+
     public function indexStudent() {
         $sub_info = Auth::user()->subjects;
         return view('students.subjects',["subjects"=>$sub_info]);
@@ -40,7 +45,10 @@ class SubjController extends Controller
 }
 
     public function store(SubjectFormRequest $request) { 
-            SubjectPr::create($request->validated()); 
+            $validatedData = $request->validated();
+            $subject = new SubjectPr($validatedData);
+            $subject->user_id = Auth::user()->id;
+            $subject->save();
             return redirect('/subjects');    
     }
 

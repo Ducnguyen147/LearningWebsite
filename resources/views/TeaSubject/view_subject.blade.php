@@ -10,18 +10,17 @@
         <p><strong>Credit Value:</strong> {{ $show->credit }}</p>
         <p><strong>Date of Creation:</strong> {{ $show->created_at }}</p>
         <p><strong>Last Modification:</strong> {{ $show->updated_at }}</p>
-        <p><strong>Number of Students:</strong> ? </p>
+        <p><strong>Number of registered students:</strong> {{$show->studentUsers->count()}} </p>
 
         <h3>Students:</h3>
-        {{--
         <ul class="list-group">
-            @foreach($show->students as $student)
+            @foreach($show->studentUsers as $student)
                 <li class="list-group-item">
-                    {{ $student->name }} ({{ $student->email }})
+                    {{ $student->name }} (Email: {{ $student->email }})
                 </li>
             @endforeach
         </ul>
-        --}}
+
 
       </div>
     </div>

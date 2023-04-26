@@ -23,6 +23,8 @@ Route::get('/', function () {
 //Subject
 Route::get('/subjects', [SubjController::class,'index'])->middleware('auth'); //index function
 
+Route::get('/contacts', [SubjController::class,'indexCont'])->name('contacts')->middleware('auth');
+
 Route::get('/subjects/create', [SubjController::class,'create']) -> name("subjects.create")->middleware('auth');
 Route::post('/subjects/create', [SubjController::class,'store'])->middleware('auth');
 

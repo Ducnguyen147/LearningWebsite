@@ -23,8 +23,8 @@
                 <p class="card-text">Overview: {{$subject["description"]}}</p>
                 <p class="card-text">Code: {{$subject["code"]}}</p>
                 <p class="card-text">Credit: {{$subject["credit"]}}</p>
-                <a href="/subjects/{{$subject["id"]}}/tasks" class="btn btn-primary">View Tasks</a>
-                <a href="/subjects/{{$subject["id"]}}/edit" class="btn btn-secondary">Edit</a>
+                <a href="/subjects/{{$subject["id"]}}/tasks" class="btn btn-primary">Edit Task</a>
+                <a href="/subjects/{{$subject["id"]}}/edit" class="btn btn-secondary">Edit Subject</a>
                 <form action="/subjects/{{$subject["id"]}}" method="post">
                     @csrf
                     @method("delete")
